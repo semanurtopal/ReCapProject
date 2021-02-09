@@ -9,5 +9,6 @@ namespace Business.Abstract
     {
         
         List<Color> GetAll();
+        Color GetById(int colorId);
     }
 }
