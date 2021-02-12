@@ -10,14 +10,89 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarTest();
+            //CarTest();
             //BrandTest();
+
+            //Core.Utilities.Results.IResult result = RentalTest();
+
+            //Core.Utilities.Results.IResult result = CustomerTest();
+
+            //UserTest();
+        }
+
+        private static void UserTest()
+        {
+            UserManager user = new UserManager(new EfUserDal());
+            var result = user.Add(new User
+            {
+                UserId=6,
+                FirstName = "Deniz",
+                LastName = "Azaklı",
+                Email = "denizazakli@gmail.com",
+                Password = "123456"
+            });
+
+            if (result.Success == true)
+            {
+                Console.WriteLine(result.Message);
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+        }
+
+        private static Core.Utilities.Results.IResult CustomerTest()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            var result = customerManager.Add(new Customer
+            {
+                CustomerId=6,
+                CompanyName = "Trainer"
+            });
+            if (result.Success == true)
+            {
+                Console.WriteLine(result.Message);
+
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+
+            }
+
+            return result;
+        }
+
+        private static Core.Utilities.Results.IResult RentalTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal(),new EfCarDal());
+            var result = rentalManager.Add(new Rental()
+            {
+                RentalId=6,
+                CarId = 2,
+                CustomerId = 2,
+                RentDate = new DateTime(2021, 2, 12),
+                ReturnDate=new DateTime(2021,2,13)
+            });
+            if (result.Success == true)
+            {
+                Console.WriteLine(result.Message);
+
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+
+            }
+
+            return result;
         }
 
         private static void BrandTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.BrandName);
             }
@@ -26,8 +101,7 @@ namespace ConsoleUI
         private static void CarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-            ColorManager colorManager = new ColorManager(new EfColorDal());
+            
 
             carManager.Add(new Car
             {
@@ -38,47 +112,56 @@ namespace ConsoleUI
                 DailyPrice = 250,
                 Description = "Comfort"
             });
+            
 
             Console.WriteLine("*****************");
 
 
 
-            Console.WriteLine("*****************");
-
-
-            foreach (var car in carManager.GetAll())
+            foreach (var car in carManager.GetAll().Data)
             {
                 Console.WriteLine(car.Description + car.CarName + "Fiyat: " + car.DailyPrice);
             }
 
             Console.WriteLine("*****************");
 
-            foreach (var car in carManager.GetCarsByBrandId(2))
+            foreach (var car in carManager.GetCarsByBrandId(2).Data)
             {
                 Console.WriteLine(car.Description + "Fiyat: " + car.DailyPrice);
             }
 
             Console.WriteLine("*****************");
 
-            foreach (var car in carManager.GetCarsByColorId(1))
+            foreach (var car in carManager.GetCarsByColorId(1).Data)
             {
                 Console.WriteLine(car.Description + "Fiyat: " + car.DailyPrice);
             }
 
             Console.WriteLine("*****************");
 
-            foreach (var car in carManager.GetByDailyPrice(100, 700))
+            foreach (var car in carManager.GetByDailyPrice(100, 700).Data)
             {
                 Console.WriteLine(car.Description + "Fiyat: " + car.DailyPrice);
             }
             Console.WriteLine("*****************");
-            foreach (var car in carManager.GetCarDetails())
+
+            var result = carManager.GetCarDetails();
+            if (result.Success==true)
             {
-                Console.WriteLine(car.BrandName + "/" + car.CarName);
+                foreach (var car in carManager.GetCarDetails().Data)
+                {
+                    Console.WriteLine(car.BrandName + "/" + car.CarName);
+                }
             }
-            Console.WriteLine("*****************");
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
             
-
+            Console.WriteLine("*****************");
+          
         }
+
+        
     }
 }

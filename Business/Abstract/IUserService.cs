@@ -6,10 +6,9 @@ using System.Text;
 
 namespace Business.Abstract
 {
-    public interface IColorService:IBaseService<Color>
+    public interface IUserService:IBaseService<User>
     {
-        
-        IDataResult<List<Color>> GetAll();
-        IDataResult<Color> GetById(int colorId);
+        IDataResult<List<User>> GetAll();
+        IDataResult<User> GetById(int userId);
     }
 }
