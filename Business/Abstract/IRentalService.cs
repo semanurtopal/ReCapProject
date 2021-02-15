@@ -7,8 +7,11 @@ using System.Text;
 
 namespace Business.Abstract
 {
-    interface IRentalService : IBaseService<Rental>
+    public interface IRentalService
     {
+        IResult Add(Rental rental);
+        IResult Update(Rental rental);
+        IResult Delete(Rental rental);
         IDataResult<List<Rental>> GetAll();
         IDataResult<Rental> GetById(int rentalId);
         
