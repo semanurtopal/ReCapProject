@@ -1,10 +1,15 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -17,10 +22,14 @@ namespace Business.Concrete
         {
             _customerDal = customerDal;
         }
-        public IResult Add(Customer entity)
+
+        [ValidationAspect(typeof(CustomerValidator))]
+        public IResult Add(Customer customer)
         {
-            _customerDal.Add(entity);
+
+            _customerDal.Add(customer);
             return new SuccessResult(Messages.CustomerAdded);
+
         }
 
         public IResult Delete(Customer entity)

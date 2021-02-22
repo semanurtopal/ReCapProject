@@ -1,14 +1,17 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Business.Concrete
 {
@@ -22,27 +25,15 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
             _carDal = carDal;
         }
+
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
-            Car car;
-            car = _carDal.Get(c => c.CarId == rental.CarId);
-            if (car.Available)
-            {
-                _rentalDal.Add(rental);
-                car.Available = false;
-                _carDal.Update(car);
-                Console.WriteLine(car.Available);
-
-                return new SuccessResult(Messages.RentalAdded);
-
-            }
-            else
-            {
-                return new ErrorResult(Messages.RentalInvalid);
-            }
+            _rentalDal.Add(rental);
+            return new SuccessResult(Messages.RentalAdded);
         }
 
-        
+
         public IResult Delete(Rental entity)
         {
             _rentalDal.Delete(entity);
