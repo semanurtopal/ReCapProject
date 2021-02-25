@@ -18,12 +18,12 @@ namespace Business.Concrete
     public class RentalManager : IRentalService
     {
         IRentalDal _rentalDal;
-        ICarDal _carDal;
+        ICarService _carService;
 
-        public RentalManager(IRentalDal rentalDal, ICarDal carDal)
+        public RentalManager(IRentalDal rentalDal, ICarService carService)
         {
             _rentalDal = rentalDal;
-            _carDal = carDal;
+            _carService = carService;
         }
 
         [ValidationAspect(typeof(RentalValidator))]

@@ -14,11 +14,11 @@ namespace Business.Concrete
     public class CarImageManager : ICarImageService
     {
         ICarImageDal _carImageDal;
-        ICarDal _carDal;
-        public CarImageManager(ICarImageDal carImageDal, ICarDal carDal)
+        ICarService _carService;
+        public CarImageManager(ICarImageDal carImageDal, ICarService carService)
         {
             _carImageDal = carImageDal;
-            _carDal = carDal;
+            _carService = carService;
         }
 
         public IResult Add(CarImage entity)
@@ -58,7 +58,20 @@ namespace Business.Concrete
 
         public IDataResult<List<CarImage>> GetCarImagesByCarId(int id)
         {
-            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(i => i.CarId == id));
+            var result = BusinessRules.Run(CheckIfCarId(id));
+            if (result != null)
+            {
+                return (IDataResult<List<CarImage>>)result;
+            }
+
+            var getallresult = _carImageDal.GetAll(p => p.CarId == id);
+            if (getallresult.Count == 0)
+            {
+                return new SuccessDataResult<List<CarImage>>(new List<CarImage> { new CarImage { ImagePath = FilePaths.ImageDefaultPath } });
+            }
+
+            return new SuccessDataResult<List<CarImage>>(getallresult);
+            
         }
 
         public IResult Update(CarImage entity)
@@ -85,5 +98,15 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
+
+        private IResult CheckIfCarId(int carId)
+        {
+            if (!_carService.GetById(carId).Success)
+            {
+                return new ErrorDataResult<List<CarImage>>(Messages.GetErrorCarMessage);
+            }
+            return new SuccessDataResult<List<CarImage>>();
+        }
+
     }
 }

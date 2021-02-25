@@ -66,7 +66,7 @@ namespace ConsoleUI
 
         private static Core.Utilities.Results.IResult RentalTest()
         {
-            RentalManager rentalManager = new RentalManager(new EfRentalDal(),new EfCarDal());
+            RentalManager rentalManager = new RentalManager(new EfRentalDal(),new CarManager(new EfCarDal()));
             var result = rentalManager.Add(new Rental()
             {
                 RentalId=6,

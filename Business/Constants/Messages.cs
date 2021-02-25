@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -29,10 +30,10 @@ namespace Business.Constants
         public static string RentalDeleted = "İşlem başarıyla silindi.";
         public static string RentalUpdated = "İşlem başarıyla güncellendi.";
         public static string RentalInvalid = "İşlem başarısız.";
-        internal static string CarImageDeleted;
-        internal static string AboveImageAddingLimit;
-        internal static string CarImageLimitExceded;
-        internal static string CarImageAdded;
-        internal static string CarImageUpdated;
+        public static string CarImageDeleted = "Araba resmi başarıyla silindi.";
+        public static string CarImageLimitExceded="En fazla 5 resim yüklenebilir!";
+        public static string CarImageAdded = "Araba resmi başarıyla eklendi.";
+        public static string CarImageUpdated = "Araba resmi başarıyla güncellendi.";
+        public static string GetErrorCarMessage="Araba bulunamadı.";
     }
 }
