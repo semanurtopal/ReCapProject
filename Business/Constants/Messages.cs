@@ -29,5 +29,10 @@ namespace Business.Constants
         public static string RentalDeleted = "İşlem başarıyla silindi.";
         public static string RentalUpdated = "İşlem başarıyla güncellendi.";
         public static string RentalInvalid = "İşlem başarısız.";
+        internal static string CarImageDeleted;
+        internal static string AboveImageAddingLimit;
+        internal static string CarImageLimitExceded;
+        internal static string CarImageAdded;
+        internal static string CarImageUpdated;
     }
 }

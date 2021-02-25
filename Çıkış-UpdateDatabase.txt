@@ -1,0 +1,11 @@
+﻿Updating (localdb)\MSSQLLocalDB :: RentACar
+Message SQL00000 Creating [dbo].[CarImages]...
+Message SQL00000 The transacted portion of the database update succeeded.
+Message SQL00000 Update complete.
+Updating (localdb)\MSSQLLocalDB :: RentACar
+Message SQL00000 Rename [dbo].[CarImages].[Id] to ImageId
+Message SQL00000 Caution: Changing any part of an object name could break scripts and stored procedures.
+Message SQL00000 Starting rebuilding table [dbo].[CarImages]...
+Message SQL00000 Caution: Changing any part of an object name could break scripts and stored procedures.
+Message SQL00000 The transacted portion of the database update succeeded.
+Message SQL00000 Update complete.
