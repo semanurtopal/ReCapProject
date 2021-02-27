@@ -1,9 +1,11 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Business;
+using Core.Utilities.Helpers;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,34 +17,37 @@ namespace Business.Concrete
     {
         ICarImageDal _carImageDal;
         ICarService _carService;
+        
         public CarImageManager(ICarImageDal carImageDal, ICarService carService)
         {
             _carImageDal = carImageDal;
-            _carService = carService;
+            _carService =  carService;   
         }
 
-        public IResult Add(CarImage entity)
+        public IResult Add(IFormFile file, CarImage carImage)
         {
-            IResult result = BusinessRules.Run(CheckIfCarImageLimitExceded(entity.CarId));
+            IResult result = BusinessRules.Run(CheckIfCarImageLimitExceded(carImage.CarId));
             if (result!=null)
             {
                 return result;
             }
 
-            string createPath = ImagePath(entity.CarId);
-            File.Copy(entity.ImagePath, createPath);
-            entity.ImagePath = createPath;
-            entity.Date = DateTime.Now;
+            carImage.ImagePath = FileHelper.Add(file);
+            carImage.Date = DateTime.Now;
 
-            _carImageDal.Add(entity);
+            _carImageDal.Add(carImage);
             return new SuccessResult(Messages.CarImageAdded);
         }
 
-        public IResult Delete(CarImage entity)
+        public IResult Delete(CarImage carImage)
         {
-            var imageData = _carImageDal.Get(i => i.ImageId == entity.ImageId);
-            File.Delete(imageData.ImagePath);
-            _carImageDal.Delete(entity);
+            IResult result = BusinessRules.Run(CarImageDelete(carImage));
+
+            if (result != null)
+            {
+                return result;
+            }
+            _carImageDal.Delete(carImage);
             return new SuccessResult(Messages.CarImageDeleted);
         }
 
@@ -56,7 +61,7 @@ namespace Business.Concrete
             return new SuccessDataResult<CarImage>(_carImageDal.Get(i => i.ImageId == carImageId));
         }
 
-        public IDataResult<List<CarImage>> GetCarImagesByCarId(int id)
+        public IDataResult<List<CarImage>> GetImagesByCarId(int id)
         {
             var result = BusinessRules.Run(CheckIfCarId(id));
             if (result != null)
@@ -74,13 +79,11 @@ namespace Business.Concrete
             
         }
 
-        public IResult Update(CarImage entity)
+        public IResult Update(IFormFile file,CarImage carImage)
         {
-            string createPath = ImagePath(entity.CarId);
-            File.Copy(entity.ImagePath, createPath);
-            File.Delete(entity.ImagePath);
-            entity.ImagePath = createPath;
-            _carImageDal.Update(entity);
+            carImage.ImagePath = FileHelper.Update(_carImageDal.Get(p => p.ImageId == carImage.ImageId).ImagePath, file);
+            carImage.Date = DateTime.Now;
+            _carImageDal.Update(carImage);
             return new SuccessResult(Messages.CarImageUpdated);
         }
 
@@ -106,6 +109,21 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<CarImage>>(Messages.GetErrorCarMessage);
             }
             return new SuccessDataResult<List<CarImage>>();
+        }
+
+        private IResult CarImageDelete(CarImage carImage)
+        {
+            try
+            {
+                File.Delete(carImage.ImagePath);
+            }
+            catch (Exception exception)
+            {
+
+                return new ErrorResult(exception.Message);
+            }
+
+            return new SuccessResult();
         }
 
     }
