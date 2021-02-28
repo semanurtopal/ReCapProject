@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Data.OleDb;
 
 namespace ImagesForm
 {
@@ -20,6 +21,8 @@ namespace ImagesForm
         
         private void button1_Click(object sender, EventArgs e)
         {
+            OleDbConnection con = new OleDbConnection("");
+
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.ShowDialog();
