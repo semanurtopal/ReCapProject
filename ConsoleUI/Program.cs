@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Core.Entities.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
@@ -20,27 +21,27 @@ namespace ConsoleUI
             //UserTest();
         }
 
-        private static void UserTest()
-        {
-            UserManager user = new UserManager(new EfUserDal());
-            var result = user.Add(new User
-            {
-                UserId=6,
-                FirstName = "Deniz",
-                LastName = "Azaklı",
-                Email = "denizazakli@gmail.com",
-                Password = "123456"
-            });
+        //private static void UserTest()
+        //{
+        //    UserManager user = new UserManager(new EfUserDal());
+        //    var result = user.Add(new User
+        //    {
+        //        UserId=6,
+        //        FirstName = "Deniz",
+        //        LastName = "Azaklı",
+        //        Email = "denizazakli@gmail.com",
+        //        Password = "123456"
+        //    });
 
-            if (result.Success == true)
-            {
-                Console.WriteLine(result.Message);
-            }
-            else
-            {
-                Console.WriteLine(result.Message);
-            }
-        }
+        //    if (result.Success == true)
+        //    {
+        //        Console.WriteLine(result.Message);
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine(result.Message);
+        //    }
+        //}
 
         private static Core.Utilities.Results.IResult CustomerTest()
         {
