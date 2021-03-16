@@ -14,15 +14,15 @@
             <th>Mevcut</th>
         </tr>
     </thead>
-<table class="table">
-    <tr *ngFor="let car of cars">
-        <td>{{car.carId}}</td>
-        <td>{{car.brandName}}</td>
-        <td>{{car.colorName}}</td>
-        <td>{{car.carName}}</td>
-        <td>{{car.modelYear}}</td>
-        <td>{{car.dailyPrice}}</td>
-        <td>{{car.description}}</td>
-        <td>{{car.available}}</td>
-    </tr>
-</table>>
+    <tbody>
+        <tr routerLink="/cars/car-detail/{{car.carId}}" *ngFor="let car of cars">
+            <td>{{car.carId}}</td>
+            <td>{{car.colorName}}</td>
+            <td>{{car.brandName}}</td>
+            <td>{{car.modelYear}}</td>
+            <td>{{car.dailyPrice}} ₺</td>
+            <td>{{car.description}}</td>
+            <td>{{car.available}}</td>
+        </tr>
+    </tbody>
+    </table>
