@@ -3,7 +3,7 @@
   </div>
 
   <ul class="list-group">
-    <li [class]="getAllColorClass()" routerLink = "/cars">Tüm Arabalar</li>
+    <li [class]="getAllColorClass()" routerLink = "/cars">Tüm Renkler</li>
     <li (click)="setCurrentColor(color)" 
     routerLink = "/cars/color/{{color.colorId}}"
     *ngFor="let color of colors" 
