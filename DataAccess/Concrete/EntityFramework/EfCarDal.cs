@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -24,10 +25,13 @@ namespace DataAccess.Concrete.EntityFramework
                              on c.ColorId equals r.ColorId
                              select new CarDetailDto
                              {
-                                 CarName = c.CarName,
+                                 Id = c.CarId,
+                                 CarName = c.Description,
                                  BrandName = b.BrandName,
                                  ColorName = r.ColorName,
-                                 DailyPrice = c.DailyPrice
+                                 ModelYear = c.ModelYear,
+                                 DailyPrice = c.DailyPrice,
+                                 Description = c.Description
                              };
                 return result.ToList();
             }

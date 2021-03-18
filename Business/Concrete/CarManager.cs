@@ -90,5 +90,10 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.DailyPriceInvalid);
             }
         }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetailsByCarId(int carId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails().Where(p => p.Id == carId).ToList());
+        }
     }
 }
