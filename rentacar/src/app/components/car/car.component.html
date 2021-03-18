@@ -3,27 +3,32 @@
   </div>
 <table *ngIf="dataLoaded==true" class="table">
     <thead>
-        <tr>
-            <th>Id</th>
-            <th>Marka Adı</th>
-            <th>Renk</th>
-            <th>Araba Adı</th>
-            <th>Model Yılı</th>
-            <th>Günlük Fiyat</th>
-            <th>Tarif</th>
-            <th>Mevcut</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr routerLink="/cars/car-detail/{{car.carId}}" *ngFor="let car of cars">
-            <td>{{car.carId}}</td>
-            <td>{{car.colorName}}</td>
-            <td>{{car.brandName}}</td>
-            <td>{{car.carName}}</td>
-            <td>{{car.modelYear}}</td>
-            <td>{{car.dailyPrice}} ₺</td>
-            <td>{{car.description}}</td>
-            <td>{{car.available}}</td>
-        </tr>
-    </tbody>
-    </table>
+        <h5 class="card-title">Arabalar</h5>
+      </thead>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div *ngFor="let car of cars" class="col" [class]="getImageClass(car.carId)">
+          <div class="card">
+            <img
+              src="{{ imagePath }}"
+              routerLink="/car-image/{{ car.carId }}"
+              class="img-thumbnail"
+              alt="..."
+            />
+            <div class="card-body">
+                <h5 class="card-title">{{ car.brandName }}</h5>
+                <p class="card-text">
+                  <li class="list-group-item list-group-item-primary">
+                    Renk: {{ car.colorName }}
+                  </li>
+                  <li class="list-group-item list-group-item-primary">
+                    Model: {{ car.modelYear }}
+                  </li>
+                  <li class="list-group-item list-group-item-primary">
+                    Günlük fiyat: {{ car.dailyPrice }}
+                  </li>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </table>
