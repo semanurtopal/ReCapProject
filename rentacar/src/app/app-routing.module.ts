@@ -29,6 +29,7 @@ const routes: Routes = [
   {
     path:"car-image/:carId",  component:CarImageComponent
   },
+  { path:"cars/carDetailAndImagesDto/:car", component:CarComponent},
 ];
 
 @NgModule({

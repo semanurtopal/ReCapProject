@@ -1,0 +1,10 @@
+<li *ngIf="rentItems.length>0" class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Kiraladıklarım
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li *ngFor="let rentItem of rentItems"><a class="dropdown-item" ><span class="badge bg-secondary">{{rentItem.date}}</span>{{rentItem.car.brandName}}<span (click)="removeFromRent(rentItem.car)" class="badge bg-secondary">Sil</span></a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" >Kiraladıklarıma Git</a></li>
+    </ul>
+  </li>

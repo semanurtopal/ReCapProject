@@ -2,6 +2,14 @@
     <span class="visually-hidden">Loading...</span>
   </div>
 
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Marka Ara</label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="arama ifadesi giriniz">
+</div>
+<div *ngIf="filterText.length>2" class="alert alert-success">
+  {{filterText}} aradınız.
+</div>
+
   <ul class="list-group">
     <li [class]="getAllBrandClass()" routerLink = "/cars">Tüm Markalar</li>
     <li (click)="setCurrentBrand(brand)" 
@@ -20,7 +28,7 @@
         </tr>
     </thead>
 <table class="table">
-    <tr *ngFor="let brand of brands">
+    <tr *ngFor="let brand of brands | brandFilterPipe:filterText">
         <td>{{brand.brandId}}</td>
         <td>{{brand.brandName}}</td>
     </tr>

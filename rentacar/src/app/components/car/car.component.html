@@ -1,12 +1,41 @@
 <div *ngIf="dataLoaded==false" class="spinner-border text-danger" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Araba Ara</label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="arama ifadesi giriniz">
+</div>
+<div *ngIf="filterText.length>2" class="alert alert-success">
+  {{filterText}} aradınız.
+</div>
+
+<ul class="list-group">
+  <li [class]="getAllCarDetailsClass()" routerLink = "/cars">Araç Detayları</li>
+  <li (click)="setCurrentCarDetails(carDetailAndImagesDto)" 
+  routerLink = "/cars/carDetailAndImagesDto/{{carDetailAndImagesDto.car}}"
+  *ngFor="let car of cars" 
+  [class]="getCurrentCarDetailsClass(carDetailAndImagesDto)">
+  {{carDetailAndImagesDto.car}}</li>
+  
+</ul>
+
+<h5 *ngIf="currentCarDetails">{{currentCarDetails.car.brandName}} seçtiniz</h5>
+
+
+
 <table *ngIf="dataLoaded==true" class="table">
     <thead>
         <h5 class="card-title">Arabalar</h5>
+        
       </thead>
       <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div *ngFor="let car of cars" class="col" [class]="getImageClass(car.carId)">
+        <div *ngFor="let car of cars | carFilterPipe:filterText" class="col" [class]="getImageClass(car.carId)">
+          <label>Listele:</label>
+          <select name = "listele">
+            <option>Marka<button (click)="getCarsByBrandId(car.brandId)" type="button" class="btn btn-success">Filtrele</button></option>
+            <option>Color<button (click)="getCarsByColorId(car.colorId)" type="button" class="btn btn-success">Filtrele</button></option>
+          </select>
+          
           <div class="card">
             <img
               src="{{ imagePath }}"
@@ -26,7 +55,11 @@
                   <li class="list-group-item list-group-item-primary">
                     Günlük fiyat: {{ car.dailyPrice }}
                   </li>
+                  <li class="list-group-item list-group-item-primary">
+                    <button (click)="addToRental(car)" type ="button" class="btn btn-success">Kirala</button>
+                  </li>
                 </p>
+
               </div>
             </div>
           </div>
