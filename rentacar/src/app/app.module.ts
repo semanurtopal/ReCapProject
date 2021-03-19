@@ -17,11 +17,12 @@ import { CarFilterPipePipe } from './pipes/car-filter-pipe.pipe';
 import { BrandFilterPipePipe } from './pipes/brand-filter-pipe.pipe';
 import { ColorFilterPipePipe } from './pipes/color-filter-pipe.pipe';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
-
-import {ToastrModule} from "ngx-toastr";
 import { RentSummaryComponent } from './components/rent-summary/rent-summary.component';
 import { RentalSummaryComponent } from './components/rental-summary/rental-summary.component';
 import { PaymentComponent } from './components/payment/payment.component';
+
+import {ToastrModule} from "ngx-toastr";
+
 
 @NgModule({
   declarations: [
