@@ -29,7 +29,7 @@
         
       </thead>
       <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div *ngFor="let car of cars | carFilterPipe:filterText" class="col" [class]="getImageClass(car.carId)">
+        <div *ngFor="let car of cars | carFilterPipe:filterText" class="col">
           <label>Listele:</label>
           <select name = "listele">
             <option>Marka<button (click)="getCarsByBrandId(car.brandId)" type="button" class="btn btn-success">Filtrele</button></option>
@@ -38,23 +38,28 @@
           
           <div class="card">
             <img
-              src="{{ imagePath }}"
-              routerLink="/car-image/{{ car.carId }}"
-              class="img-thumbnail"
+              [src]="getImageByCarId(car)"
+              style="width: 300px; height: 200px"
+              routerLink="/car-image/{{ car.id }}"
+              class="img-fluid img-thumbnail"
               alt="..."
             />
             <div class="card-body">
-                <h5 class="card-title">{{ car.brandName }}</h5>
-                <p class="card-text">
-                  <li class="list-group-item list-group-item-primary">
-                    Renk: {{ car.colorName }}
-                  </li>
-                  <li class="list-group-item list-group-item-primary">
-                    Model: {{ car.modelYear }}
-                  </li>
-                  <li class="list-group-item list-group-item-primary">
-                    Günlük fiyat: {{ car.dailyPrice }}
-                  </li>
+              <h5 class="card-title">
+                <li class="list-group-item list-group-item-warning">
+                  Marka : {{ car.brandName }}
+                </li>
+              </h5>
+              <p class="card-text">
+                <li class="list-group-item list-group-item-primary">
+                  Renk: {{ car.colorName }}
+                </li>
+                <li class="list-group-item list-group-item-primary">
+                  Model: {{ car.modelYear }}
+                </li>
+                <li class="list-group-item list-group-item-primary">
+                  Günlük fiyat: {{ car.dailyPrice | currency: "₺" }}
+                </li>
                   <li class="list-group-item list-group-item-primary">
                     <button (click)="addToRental(car)" type ="button" class="btn btn-success">Kirala</button>
                   </li>
