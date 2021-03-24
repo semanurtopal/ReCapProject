@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +22,12 @@ import { RentalSummaryComponent } from './components/rental-summary/rental-summa
 import { PaymentComponent } from './components/payment/payment.component';
 
 import {ToastrModule} from "ngx-toastr";
+import { CarAddComponent } from './components/car-add/car-add.component';
+import { BrandAddComponent } from './components/brand-add/brand-add.component';
+import { ColorAddComponent } from './components/color-add/color-add.component';
+import { CarUpdateComponent } from './components/car-update/car-update.component';
+import { BrandUpdateComponent } from './components/brand-update/brand-update.component';
+import { ColorUpdateComponent } from './components/color-update/color-update.component';
 
 
 @NgModule({
@@ -40,10 +46,17 @@ import {ToastrModule} from "ngx-toastr";
     CarDetailComponent,
     RentSummaryComponent,
     RentalSummaryComponent,
-    PaymentComponent
+    PaymentComponent,
+    CarAddComponent,
+    BrandAddComponent,
+    ColorAddComponent,
+    CarUpdateComponent,
+    BrandUpdateComponent,
+    ColorUpdateComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
