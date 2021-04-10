@@ -2,7 +2,7 @@
 
 **Araba kiralama projesi.**
 
-## Back-End
+## [Back-End](https://github.com/semanurtopal/ReCapProject)
 
 **[Entity Framework](https://docs.microsoft.com/tr-tr/ef/core/get-started) Kullanılarak Hazırlanmıştır**
 
@@ -14,7 +14,7 @@
 - [Entities](https://github.com/semanurtopal/ReCapProject/tree/master/Entities) 
 - [WebAPI](https://github.com/semanurtopal/ReCapProject/tree/master/WebAPI) 
 
-## Front-End
+## [Front-End](https://github.com/semanurtopal/ReCapProject/tree/master/rentacar)
 
 **[Angular](https://angular.io/cli) ve [Bootstrap v5.0](https://getbootstrap.com/docs/5.0/getting-started/introduction/) Kullanılarak Hazırlanmıştır**
 
