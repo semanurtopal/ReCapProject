@@ -23,6 +23,22 @@
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
+        <ul *ngIf="isLogin === false" class="navbar-nav ml-lg-auto">
+          <div class="text-center">
+            <button type="button" class="btn btn-sm btn-primary my-4" routerLink="/signin">Sign in</button>
+            <button type="button" class="btn btn-sm btn-primary my-4" routerLink="/signup">Sign up</button>
+          </div>
+        </ul>
       </div>
+      <form class="container-fluid">
+        <div class="input-group">
+          <span class="input-group-text" id="basic-addon1">@</span>
+          <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+      </form>
+      <form class="container-fluid justify-content-start">
+        <button class="btn btn-outline-success me-2" (click)="login()">Giriş</button>
+        <button class="btn btn-sm btn-outline-secondary" (click)="Register()">Register</button>
+      </form>
     </div>
   </nav>
