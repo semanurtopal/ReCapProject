@@ -20,6 +20,7 @@
 
 ### İçerik
 - [Components](https://github.com/semanurtopal/ReCapProject/tree/master/rentacar/src/app/components) 
+- [Directives](https://github.com/semanurtopal/ReCapProject/tree/master/rentacar/src/app/directives)
 - [Guards](https://github.com/semanurtopal/ReCapProject/tree/master/rentacar/src/app/guards) 
 - [Interceptors](https://github.com/semanurtopal/ReCapProject/tree/master/rentacar/src/app/interceptors) 
 - [Models](https://github.com/semanurtopal/ReCapProject/tree/master/rentacar/src/app/models) 
