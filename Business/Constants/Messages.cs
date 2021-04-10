@@ -45,5 +45,6 @@ namespace Business.Constants
         public static string UserAlreadyExists = "Bu kullanıcı zaten mevcut";
         public static string AccessTokenCreated = "Access token başarıyla oluşturuldu";
         internal static string PaymentAdded = "Ödeme başarıyla kaydedildi.";
+        internal static string FindeksRatingCalculated = "Findeks oranı başarıyla hesaplandı.";
     }
 }

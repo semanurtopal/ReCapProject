@@ -74,5 +74,16 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet("getuserfindeksrating")]
+        public IActionResult GetUserFindeksRating(int findeksRating)
+        {
+            var result = _userService.GetUserFindeksRating(findeksRating);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

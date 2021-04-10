@@ -18,10 +18,13 @@ namespace Business.Concrete
     public class UserManager : IUserService
     {
         IUserDal _userDal;
+        IFindeksService _findeksService;
 
-        public UserManager(IUserDal userDal)
+
+        public UserManager(IUserDal userDal, IFindeksService findeksService)
         {
             _userDal = userDal;
+            _findeksService = findeksService;
         }
         [ValidationAspect(typeof(UserValidator))]
         public IResult Add(User user)
@@ -62,6 +65,11 @@ namespace Business.Concrete
         public IDataResult<User> GetByMail(string email)
         {
             return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+        }
+
+        public IDataResult<List<User>> GetUserFindeksRating(int findeksRating)
+        {
+            return new SuccessDataResult<List<User>>(_userDal.GetAll(u => u.FindeksRating >= findeksRating));
         }
     }
 }
